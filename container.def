@@ -1,0 +1,16 @@
+Bootstrap: docker
+From: ufscar/ubuntu_mpich:latest
+
+%help
+    Laplace Solver using Simple Jacobi Iteration to excute on openHPC UFSCar cluster
+
+%files
+   ./app/. /opt
+
+%post
+    echo "Compiling programs..."
+    cd /opt && make
+    cp laplace_seq_iteracoes laplace_pth /usr/bin/
+
+%runscript
+    exec $@
